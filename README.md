@@ -324,9 +324,7 @@ Esse deve ser o resultado final
 
 ## Entendendo o que é um component
 
-De forma resumida podemos dizer que component é uma função que retorna um elemento JSX.
-
-Para criarmos um é preciso entender um pouco como funciona o JSX
+Para criarmos um component é preciso entender um pouco como funciona o JSX
 
 ### JSX
 
@@ -462,6 +460,115 @@ Termos `background-color: blue;` do css, para transformar para CSS-in-JS retiram
 Estilos que não são palavras compostas possuem a mesma sintaxe, ex: `height`, `width`, `margin`...
 
 Se desejar saber mais a respeito de estilização basta olhar esse [link da documentação](https://pt-br.reactjs.org/docs/dom-elements.html#style)
+
+### Criando Component
+
+Até o momento viemos criando components
+
+```js
+// Esse aqui é o component home
+function Home() {
+  return (
+    <div>
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+
+export default Home;
+```
+
+De forma resumida podemos dizer que component é uma função que retorna um elemento JSX. Existem diversas formas de criar um component. Iremos mostrar alguns exemplos de como lidar com eles
+
+```js
+// Arquivo src/pages/Home/index.js
+// Forma padrão de declaração
+function Home() {
+  return (
+    <div>
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+export default Home;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+// Através de arrow functions
+const Home = () => {
+  return (
+    <div>
+      <h1>Hello World</h1>
+    </div>
+  );
+};
+export default Home;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+// Podemos criar um outro component para melhorar sua reutilização
+function Hello() {
+  return <h1>Hello World</h1>;
+}
+function Home() {
+  return (
+    <div>
+      <Hello />
+      <Hello />
+      <Hello />
+    </div>
+  );
+}
+export default Home;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+// Podemos criar um outro component para melhorar sua reutilização
+// Usando arrow functions
+const Hello = () => <h1>Hello World</h1>;
+
+function Home() {
+  return (
+    <div>
+      <Hello />
+      <Hello />
+      <Hello />
+    </div>
+  );
+}
+export default Home;
+```
+
+Essas são as formas básicas para criar um component. Podemos estar usando components a partir de outros arquivos. Por exemplo:
+
+```js
+// Arquivo src/components/Hello/index.js
+
+const Hello = () => <h1>Hello World</h1>;
+
+export default Hello;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+import Hello from "../../components/Hello";
+// Em JS ele pega por padrão o arquivo index.js, então podemos emitir, mas podemos chamar o index também (não recomendo chamar)
+// import Hello from "../../components/Hello/index.js";
+
+function Home() {
+  return (
+    <div>
+      <Hello />
+      <Hello />
+      <Hello />
+    </div>
+  );
+}
+export default Home;
+```
 
 ---
 
