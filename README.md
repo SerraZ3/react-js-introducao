@@ -116,7 +116,7 @@ O que esse comando está fazendo? `npm` é o gerenciador, `install` é o comando
 
 ---
 
-### Criando um projeto do zero
+## Criando um projeto do zero
 
 Existem duas formas para criar um projeto em ReactJs.
 
@@ -133,7 +133,9 @@ npx -v
 # exemplo: 6.14.8
 ```
 
-Criando projeto com create-react-app:
+### Criando Projeto
+
+**Criando projeto com create-react-app:**
 
 Rode o seguinte comando para criar seu projetinho
 
@@ -143,13 +145,43 @@ create-react-app nome-projeto
 
 Em `nome-projeto` você deve por o nome que será o seu projeto
 
-Criando projeto com npx:
+**Criando projeto com npx:**
 
 Esse comando diferente do anterior, ele não instala as configurações do `create-react-app` na sua máquina, ele busca no banco de dados do `npm` e roda direto na sua máquina
 
 ```sh
 npx create-react-app nome-projeto
 ```
+
+### Estrutura de arquivos
+
+Como resultado da criação do projeto é criado uma pasta com `nome-projeto`, nesse exemplo usamos o `meu-primeiro-projeto` como nome do projeto. A pasta gerada terá os seguintes arquivos:
+
+![Estrutura de pastas](./img/pastas-react.png)
+
+O diretório é dividido da seguinte forma:
+
+- node_modules (Pasta com instalação de pacotes externos)
+- public (Pasta com configuração html do site)
+  - favicon.ico (Icone do site)
+  - index.html (Arquivo com a estrutura base do HTML)
+  - logo192.png (Logo react)
+  - logo512.png (Logo react)
+  - manifest.json (Arquivo que descreve seu app e configura para aplicações mobile)
+  - robots.txt (Arquivo para robos CEO)
+- src (Arquivo com seu site)
+  - App.css (Estilo do App.js)
+  - App.js (Onde fica o código de sua aplicação)
+  - App.test.js (Arquivo de teste)
+  - index.css (Estilo de toda sua aplicação)
+  - index.js (Arquivo que chama o component principal)
+  - logo.svg (Logo)
+  - reportWebVitals.js (Verifica performance do seu projeto e outras informações)
+  - setupTests.js (Configuração para testes)
+- .gitignore (Não envia arquivos ou pastas para o github)
+- package.json (Gerenciador de pacotes)
+- README
+- yarn.lock (ou package-lock.json) (Arquivo de configuração)
 
 ---
 
