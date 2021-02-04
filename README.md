@@ -287,7 +287,37 @@ function Home() {
 export default Home;
 ```
 
-Por enquanto não explicarei o que acontece no `Home` pois veremos mais a frente o que está acontecendo
+Por enquanto não explicarei o que acontece no `Home` pois veremos mais a frente como criar um component.
+
+_Obs:_ Caso sua aplicação não esteja funcionando após alterar diversas pastas recomendo reiniciar o servidor.
+
+### Hello World
+
+Agora que configuramos o projeto, vamos alterar o `src/pages/Home/index.js` para fazermos um Hello World.
+
+Primeiro verifique que o servidor está rodando. Em seguida abra o arquivo e ponha o seguinte código:
+
+```js
+// Nome do component. Lembre-se que ele deve ser sempre com a
+// primeira letra maiúscula
+function Home() {
+  // Um component sempre deve retorna um valor
+  // Dentro desse return parece que estamos retornando html,
+  // mas na verdade estamos retornando JSX que será posteriormente
+  // convertido em HTML, CSS e JS
+  return (
+    <div>
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+// Sempre devemos exportar um component após criá-lo para podermos usar fora do arquivo
+export default Home;
+```
+
+Esse deve ser o resultado final
+
+![Hello world](./img/hello-world.png)
 
 ---
 
