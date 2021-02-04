@@ -50,6 +50,7 @@
     <li>
         <a href="#entendendo-o-que-é-um-component">Entendendo o que é um component</a>
         <ul>
+            <li><a href="#jsx">JSX</a></li>
             <li><a href="#criando-compenent">Criando component</a></li>
             <li><a href="#o-que-é-props">O que é props?</a></li>
             <li><a href="#trabalhando-com-props">Trabalhando com props</a></li>
@@ -318,6 +319,149 @@ export default Home;
 Esse deve ser o resultado final
 
 ![Hello world](./img/hello-world.png)
+
+---
+
+## Entendendo o que é um component
+
+De forma resumida podemos dizer que component é uma função que retorna um elemento JSX.
+
+Para criarmos um é preciso entender um pouco como funciona o JSX
+
+### JSX
+
+JSX significa JavaScript XML, ou seja, é uma linguagem de marcação que tem o objetivo converter um código em outro, nesse caso JSX e JS para HTML. O JSX é bastante semelhante ao HTML.
+
+Exemplo:
+
+```js
+// Função JS que retorna um JSX
+function Exemplo() {
+  return (
+    <div>
+      <h1>Titulo 1</h1>
+      <h2>Titulo 2</h2>
+      <h3>Titulo 3</h3>
+      <p>Parágrafo</p>
+    </div>
+  );
+}
+```
+
+Uma diferença entre o html é que o JSX aceita código JS e possui alguns nomes diferentes para alguns atributos.
+
+A maior das tags html iremos usar da mesma forma no JSX, mas terão algumas que será necessário buscar na documentação como é a sintaxe. Nos exemplos tentaremos usar o máximo possivel, mas como são muitas será necessário buscar fontes externas.
+
+_Atenção!_ Nesse exemplo podemos perceber que usamos JS e JSX no mesmo arquivo .js. Tudo fora do `return` é código JS e o que está dentro é JSX
+
+**Comentário**
+
+```js
+function Exemplo() {
+  // Comentário em JS
+  return (
+    <div>
+      {/* Comentário em JSX */}
+      <h1>Titulo 1</h1>
+      <h2>Titulo 2</h2>
+      <h3>Titulo 3</h3>
+      <p>Parágrafo</p>
+    </div>
+  );
+}
+```
+
+**JS no JSX**
+
+Para usar variáveis no JSX devemos seguir o seguinte exemplo:
+
+```js
+function Exemplo() {
+  const titulo1 = "Titulo 1";
+  var titulo2 = "Titulo 2";
+  let titulo2 = "Titulo 3";
+
+  return (
+    <div>
+      <h1>{titulo1}</h1>
+      <h2>{titulo2}</h2>
+      <h3>{titulo3}</h3>
+      <p>Parágrafo</p>
+    </div>
+  );
+}
+```
+
+Para conseguir imprimir no JSX é necessário que a variável seja um string, number ou outro objeto JSX. Se for um Array ou Objeto irá gerar erro
+
+É possivel mapear arrays e imprimir diversos elementos de uma vez
+
+```js
+function Exemplo() {
+  const comprarNoMercado = ["Banana", "Maça", "Leite", "Paçoca"];
+
+  return (
+    <div>
+      <h1>Lista de compras</h1>
+      <ul>
+        {
+          // Array que iremos mapear
+          comprarNoMercado.map((item) => {
+            // Para imprimirmos na tela é necessário retornar um JSX ou string
+            // Aqui estamos retornando um JSX
+            return <li>{item}</li>;
+          })
+        }
+      </ul>
+    </div>
+  );
+}
+```
+
+**Style**
+
+A estilização no JSX possui uma sintaxe um pouco diferente do CSS, mas com a mesma lógica. O nome da sintaxe usada é CSS-in-JS
+
+```js
+function Exemplo() {
+  // Declarando variável de estilização
+  const styleH3 = {
+    height: "10px",
+    backgroundColor: "blue",
+    marginBottom: "5em",
+    // Ao se colocar o numero sem dizer o tipo de medida
+    // Ele automaticamente converte para px
+    // 50 => 50px
+    marginTop: 50,
+  };
+
+  const titulo = {
+    color: "red",
+    // 10 => 10px
+    paddingTop: 10,
+    paddingBottom: "10px",
+  };
+  return (
+    <div>
+      {/* Estilo direto na tag */}
+      <h1 style={{ fontColor: "red" }}>Titulo 1</h1>
+      {/* Multiplos estilos em um elemento */}
+      <h2 style={{ ...{ backgroundColor: "#606060" }, ...titulo }}>Titulo 2</h2>
+      {/* Multiplos estilos em um elemento */}
+      <h3 style={{ ...styleH3, ...titulo }}>Titulo 3</h3>
+      <p style={{ height: 10 }}>Parágrafo</p>
+    </div>
+  );
+}
+```
+
+A conversão da sintaxe do css para a sintaxe do CSS-in-JS funciona assim:
+
+Termos `background-color: blue;` do css, para transformar para CSS-in-JS retiramos o `-`, que une `background` a `color`, e em seguida colocamos a primeira letra da segunda palavra em maiusculo: `backgroundColor`. O valor desse estilo deve vir entre aspas para conseguir ser identificado: `backgroudColor: "blue"`.
+
+Estilos que não são palavras compostas possuem a mesma sintaxe, ex: `height`, `width`, `margin`...
+
+Se desejar saber mais a respeito de estilização basta olhar esse [link da documentação](https://pt-br.reactjs.org/docs/dom-elements.html#style)
 
 ---
 
