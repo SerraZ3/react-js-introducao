@@ -42,6 +42,7 @@
         <a href="#criando-um-projeto-do-zero">Criando um projeto do ZERO</a>
         <ul>
             <li><a href="#criando-projeto">Criando projeto</a></li>
+            <li><a href="#rodando-o-projeto">Rodando o Projeto</a></li>
             <li><a href="#estrutura-de-arquivos">Estrutura de arquivos</a></li>
             <li><a href="#hello-world">Hello World</a></li>
         </ul>
@@ -165,7 +166,11 @@ O resultado deve ser esse
 
 ![Iniciando projeto](./img/start-project.png)
 
-**O que está acontecendo aqui?** O React converte código JavaScript e JSX para HTML, CSS e JavaScript para que o navegador possa entender. Com isso, ao rodar esse comando, estamos criando um servidor que monitora as alterações no seu código e realizar essa conversão e, em seguida, atualiza sua aplicação
+**O que está acontecendo aqui?**
+
+O React converte código JavaScript e JSX para HTML, CSS e JavaScript para que o navegador possa entender. Com isso, ao rodar esse comando, estamos criando um servidor que monitora as alterações no seu código e realizar essa conversão e, em seguida, atualiza sua aplicação.
+
+O React roda um servidor no `localhost` (127.0.0.1) da sua máquina na porta 3000. É possivel alterar essa configuração posteriormente.
 
 ### Estrutura de arquivos
 
