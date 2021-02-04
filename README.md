@@ -153,35 +153,136 @@ Esse comando diferente do anterior, ele não instala as configurações do `crea
 npx create-react-app nome-projeto
 ```
 
+### Rodando o projeto
+
+Após criar o projeto é preciso rodar um comando no terminal para que a aplicação inicie. O comando deve ser rodado no raiz (dentro da pasta) do seu projeto criado
+
+```sh
+npm start
+```
+
+O resultado deve ser esse
+
+![Iniciando projeto](./img/start-project.png)
+
+**O que está acontecendo aqui?** O React converte código JavaScript e JSX para HTML, CSS e JavaScript para que o navegador possa entender. Com isso, ao rodar esse comando, estamos criando um servidor que monitora as alterações no seu código e realizar essa conversão e, em seguida, atualiza sua aplicação
+
 ### Estrutura de arquivos
 
-Como resultado da criação do projeto é criado uma pasta com `nome-projeto`, nesse exemplo usamos o `meu-primeiro-projeto` como nome do projeto. A pasta gerada terá os seguintes arquivos:
+Como resultado da criação do projeto é criado uma pasta com o nome especificado no parametro `nome-projeto`, nesse exemplo usamos `meu-primeiro-projeto` como nome do projeto. A pasta gerada terá os seguintes arquivos:
 
 ![Estrutura de pastas](./img/pastas-react.png)
 
-O diretório é dividido da seguinte forma:
+O diretório é dividido assim:
 
-- node_modules (Pasta com instalação de pacotes externos)
-- public (Pasta com configuração html do site)
-  - favicon.ico (Icone do site)
-  - index.html (Arquivo com a estrutura base do HTML)
-  - logo192.png (Logo react)
-  - logo512.png (Logo react)
-  - manifest.json (Arquivo que descreve seu app e configura para aplicações mobile)
-  - robots.txt (Arquivo para robos CEO)
-- src (Arquivo com seu site)
-  - App.css (Estilo do App.js)
-  - App.js (Onde fica o código de sua aplicação)
-  - App.test.js (Arquivo de teste)
-  - index.css (Estilo de toda sua aplicação)
-  - index.js (Arquivo que chama o component principal)
-  - logo.svg (Logo)
-  - reportWebVitals.js (Verifica performance do seu projeto e outras informações)
-  - setupTests.js (Configuração para testes)
-- .gitignore (Não envia arquivos ou pastas para o github)
-- package.json (Gerenciador de pacotes)
+- `node_modules` _(Pasta com instalação de pacotes externos)_
+- public _(Pasta com configuração html do site)_
+  - favicon.ico _(Icone do site)_
+  - index.html _(Arquivo com a estrutura base do HTML)_
+  - logo192.png _(Logo react)_
+  - logo512.png _(Logo react)_
+  - manifest.json _(Arquivo que descreve seu app e configura para aplicações mobile)_
+  - robots.txt _(Arquivo para robos CEO)_
+- src _(Pasta com conteúdo do seu site)_
+  - App.css _(Estilo do App.js)_
+  - App.js _(Onde fica o código de sua aplicação)_
+  - App.test.js _(Arquivo de teste)_
+  - index.css _(Estilo de toda sua aplicação)_
+  - index.js _(Arquivo que chama o component principal)_
+  - logo.svg _(Logo)_
+  - reportWebVitals.js _(Verifica performance do seu projeto e outras informações)_
+  - setupTests.js _(Configuração para testes)_
+- .gitignore _(Diz quais arquivos ou pastas não enviar para o github)_
+- package.json _(Configuração do gerenciador de pacotes)_
 - README
-- yarn.lock (ou package-lock.json) (Arquivo de configuração)
+- yarn.lock (ou package-lock.json) _(Arquivo de configuração)_
+
+Para nossos exemplos iremos usar essa estrutura:
+
+![Estrutura de pastas](./img/nova-estrutura-react.png)
+
+Nessa estrutura não alteramos a pasta `public` e `node_modules`.
+
+_Obs:_ Evite alterar a pasta `node_modules` pois são pacotes que são instalados automaticamente quando criado o projeto e quando se baixa algum módulo externo.
+
+Nossa nova estrutura fica dessa forma:
+
+- src _(Pasta com conteúdo do seu site)_
+  - assets _(Pasta para salvar imagens, videos e audios)_
+    - logo.svg _(Logo)_
+  - components _(Pasta que irá ficar components)_
+  - helpers _(Pasta para arquivos que auxiliam no desenvolvimento)_
+  - pages _(Pasta para paginas da aplicação)_
+    - Home _(Uma página da sua aplicação)_
+      - index.js _(Component com a página)_
+      - styles.css _(CSS da pagina)_
+      - styles.js _(arquivo de estilização da página)_
+  - routes _(Pasta para gerenciar rota entre telas)_
+  - services _(Pasta para gerenciar comunicação com API)_
+  - index.css _(Estilo de toda sua aplicação)_
+  - index.js _(Arquivo que chama o component principal)_
+
+Em nosso padrão iremos usar o nome das pastas e arquivos em minúsculo, exceto se for um component.
+
+Nesse caso para que sua aplicação possa rodar nesse formato vamos estar apagando o `reportWebVitals.js`, `setupTests.js` e `App.test.js`.
+
+Passaremos o `logo.svg` de `src/logo.svg` para `src/assets/logo.svg`.
+
+Além disso, iremos passar o conteúdo do arquivo `src/App.js` para o `src/pages/Home/index.js` e do `src/App.css` para o `src/pages/Home/styles.css`
+
+O `src/index.js` e o `src/Home/index.js` terão seu conteúdo alterado, pois alteramos o diretório e nome dos arquivos.
+
+O código fica de cada um fica assim:
+
+```js
+// src/index.js
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import Home from "./pages/Home";
+
+// ReactDOM renderiza o component dentro do método .render()
+ReactDOM.render(
+  // React.StrictMode é um ferramenta que sinaliza
+  // possíveis problemas na aplicação
+  <React.StrictMode>
+    <Home />
+  </React.StrictMode>,
+  // Pega o id do elemento que será renderizado o conteúdo a cima
+  document.getElementById("root")
+);
+```
+
+```js
+// src/pages/Home/index.js
+import logo from "../../assets/logo.svg";
+import "./styles.css";
+
+function Home() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default Home;
+```
+
+Por enquanto não explicarei o que acontece no `Home` pois veremos mais a frente o que está acontecendo
 
 ---
 
