@@ -588,7 +588,7 @@ function Home() {
 export default Home;
 ```
 
-### O que é props
+### O que é props?
 
 Como comentado anteriormente, components são como funções que retornam um JSX, então, assim como funções, ele pode receber parametros. Esse parametros podem ser padrão do component, tipo `style`, `className`... ou podem ser definidos por você.
 
@@ -611,6 +611,8 @@ export default Home;
 
 ![Props1](./img/props1.png)
 
+### Trabalhando com props
+
 ```js
 // Arquivo src/pages/Home/index.js
 // Podemos usar a desestruturação de objeto para torna o código mais limpo
@@ -630,7 +632,7 @@ function Home() {
 export default Home;
 ```
 
-Podemos criar diversos tipos de dados com o props, seja array, objeto, number...
+Podemos criar props com diversos tipos de dados com o props, seja array, objeto, number...
 
 ```js
 // Arquivo src/pages/Home/index.js
@@ -727,6 +729,8 @@ function Home() {
 export default Home;
 ```
 
+Além disso podemos passar valores vazios que recebem um valor true ou undefined
+
 ```js
 // Arquivo src/pages/Home/index.js
 const ImprimeFrase = ({ frase }) => (
@@ -745,6 +749,114 @@ function Home() {
       <ImprimeFrase frase />
       {/* frase = "Hello World" */}
       <ImprimeFrase frase="Hello World" />
+    </div>
+  );
+}
+export default Home;
+```
+
+Ou até mesmo definir valor padrão
+
+```js
+// Arquivo src/pages/Home/index.js
+const ImprimeFrase = ({ frase = false }) => (
+  <div>
+    {console.log(frase)}
+    <h1>{frase}</h1>
+  </div>
+);
+
+function Home() {
+  return (
+    <div>
+      {/* frase = false */}
+      <ImprimeFrase />
+      {/* frase = true */}
+      <ImprimeFrase frase />
+      {/* frase = "Hello World" */}
+      <ImprimeFrase frase="Hello World" />
+    </div>
+  );
+}
+export default Home;
+```
+
+### O que é state?
+
+Se precisarmos alterar o valor de uma variável de acordo com algum evento, após recebermos dados de uma api ou após nosso component ser renderizado não podemos usar os props ou criar uma variável diretamente no código. Para isso existe um conceito/ferramenta chamado state
+
+State, em resumo, seria uma variável que pode atualizar seu valor após seu component ser renderizado. Para isso iremos importar o `useState` do React dessa forma:
+
+```js
+// Arquivo src/pages/Home/index.js
+import React, { useState } from "react";
+
+function Home() {
+  // Essa é a sintaxe de declaração de um state
+  // O useState retorna um array com duas posições
+  // A primeira é a variável que terá o valor do state
+  // A segunda a função que irá alterar esse valor
+  const [contador, setContador] = useState(0);
+  // Função que pega o valor do state e soma 1
+  const incrementa = () => {
+    setContador(contador + 1);
+  };
+  // Função que pega o valor do state e diminui 1
+  const decrementa = () => {
+    setContador(contador - 1);
+  };
+  return (
+    <div>
+      <h1>{contador}</h1>
+      {/* Adicionando o evento do click e chamando funções respectivas*/}
+      <h1 onClick={incrementa}>Incrementar</h1>
+      <h1 onClick={decrementa}>Decrementar</h1>
+    </div>
+  );
+}
+export default Home;
+```
+
+### Trabalhando com state
+
+O `useState()` é uma função que recebe o valor inicial do state. No exemplo a cima o valor inicial é 0, mas podemos por valores como array, object, number...
+
+```js
+// Arquivo src/pages/Home/index.js
+import React, { useState } from "react";
+
+function Home() {
+  const [compras, setCompras] = useState(["banana", "maça", "pera"]);
+  const addAbacaxi = () => {
+    let comAbacaxi = compras.concat(["abacaxi"]);
+    setCompras(comAbacaxi);
+    // Não podemos usar o 'setCompras(compras.push('abacaxi'))'
+    // Pois a variável do state não pode ser alterado sem sua função set
+    // e o método push altera diretamente o array
+  };
+  return (
+    <div onClick={addAbacaxi}>
+      {compras.map((compra) => (
+        <h1>{compra}</h1>
+      ))}
+    </div>
+  );
+}
+export default Home;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+import React, { useState } from "react";
+
+function Home() {
+  const [loading, setLoading] = useState(false);
+  const invertLoading = () => {
+    setLoading(!loading);
+  };
+  return (
+    <div onClick={invertLoading}>
+      {loading ? <h1>carregando...</h1> : <h1>carregado</h1>}
     </div>
   );
 }
