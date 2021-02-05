@@ -51,7 +51,7 @@
         <a href="#entendendo-o-que-é-um-component">Entendendo o que é um component</a>
         <ul>
             <li><a href="#jsx">JSX</a></li>
-            <li><a href="#criando-compenent">Criando component</a></li>
+            <li><a href="#criando-component">Criando component</a></li>
             <li><a href="#o-que-é-props">O que é props?</a></li>
             <li><a href="#trabalhando-com-props">Trabalhando com props</a></li>
             <li><a href="#o-que-é-state">O que é state?</a></li>
@@ -461,6 +461,24 @@ Estilos que não são palavras compostas possuem a mesma sintaxe, ex: `height`, 
 
 Se desejar saber mais a respeito de estilização basta olhar esse [link da documentação](https://pt-br.reactjs.org/docs/dom-elements.html#style)
 
+**Class**
+
+Para usar classes no React a sintaxe é diferente mas a funcionalidade é a mesma
+
+```js
+function Exemplo() {
+  return (
+    <div className="row">
+      <div className="col-12"></div>
+      <div className="col-12"></div>
+      <div className="col-12"></div>
+    </div>
+  );
+}
+```
+
+Ao invés de `class` usammos `className`
+
 ### Criando Component
 
 Até o momento viemos criando components
@@ -564,6 +582,169 @@ function Home() {
       <Hello />
       <Hello />
       <Hello />
+    </div>
+  );
+}
+export default Home;
+```
+
+### O que é props
+
+Como comentado anteriormente, components são como funções que retornam um JSX, então, assim como funções, ele pode receber parametros. Esse parametros podem ser padrão do component, tipo `style`, `className`... ou podem ser definidos por você.
+
+```js
+// Arquivo src/pages/Home/index.js
+const ImprimeFrase = (props) => <h1>{props.frase}</h1>;
+
+function Home() {
+  return (
+    <div>
+      {/* 'frase' seria como um parametro de uma função só que na sintaxe JSX */}
+      <ImprimeFrase frase={"Que dia bonito!"} />
+      <ImprimeFrase frase="Hello World" />
+      <ImprimeFrase frase="Aqui só tem Dev de qualidade!" />
+    </div>
+  );
+}
+export default Home;
+```
+
+![Props1](./img/props1.png)
+
+```js
+// Arquivo src/pages/Home/index.js
+// Podemos usar a desestruturação de objeto para torna o código mais limpo
+const ImprimeFrase = ({ frase }) => <h1>{frase}</h1>;
+// Basicamente estamos pegando a chave 'frase' do objeto 'props'
+
+function Home() {
+  return (
+    <div>
+      {/* 'frase' seria como um parametro de uma função só que na sintaxe JSX */}
+      <ImprimeFrase frase={"Que dia bonito!"} />
+      <ImprimeFrase frase="Hello World" />
+      <ImprimeFrase frase="Aqui só tem Dev de qualidade!" />
+    </div>
+  );
+}
+export default Home;
+```
+
+Podemos criar diversos tipos de dados com o props, seja array, objeto, number...
+
+```js
+// Arquivo src/pages/Home/index.js
+// Imprime o objeto produto
+const ImprimeProduto = ({ produto }) => (
+  <div>
+    <h1>{produto.nome}</h1>
+    <h1>{produto.preco}</h1>
+    <h1>{produto.unidade}</h1>
+  </div>
+);
+
+function Home() {
+  return (
+    <div>
+      <ImprimeProduto
+        produto={{
+          nome: "Batata",
+          preco: 2.5,
+          unidade: 10,
+        }}
+      />
+    </div>
+  );
+}
+export default Home;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+// Imprime um array de objetos produto
+const ImprimeProdutos = ({ produtos }) =>
+  produtos.map((produto) => (
+    <div>
+      <h1>{produto.nome}</h1>
+      <h1>{produto.preco}</h1>
+      <h1>{produto.unidade}</h1>
+      <hr />
+    </div>
+  ));
+const produtos = [
+  {
+    nome: "Batata",
+    preco: 2.5,
+    unidade: 10,
+  },
+  {
+    nome: "Limão",
+    preco: 13.4,
+    unidade: 130,
+  },
+  {
+    nome: "Caju",
+    preco: 1.4,
+    unidade: 300,
+  },
+];
+function Home() {
+  return (
+    <div>
+      <ImprimeProdutos produtos={produtos} />
+    </div>
+  );
+}
+export default Home;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+// Podemos passar quantos props quisermos
+const ImprimeEndereco = ({ rua, bairro, cidade, cep, numero }) => (
+  <div>
+    <h1>{rua}</h1>
+    <h1>{bairro}</h1>
+    <h1>{cep}</h1>
+    <h1>{numero}</h1>
+    <h1>{cidade}</h1>
+  </div>
+);
+
+function Home() {
+  return (
+    <div>
+      <ImprimeEndereco
+        rua={"Rua são josé"}
+        bairro="José Santos"
+        numero={201}
+        cidade="Recife"
+        cep="12345-26"
+      />
+    </div>
+  );
+}
+export default Home;
+```
+
+```js
+// Arquivo src/pages/Home/index.js
+const ImprimeFrase = ({ frase }) => (
+  <div>
+    {console.log(frase)}
+    <h1>{frase}</h1>
+  </div>
+);
+
+function Home() {
+  return (
+    <div>
+      {/* frase = undefined */}
+      <ImprimeFrase />
+      {/* frase = true */}
+      <ImprimeFrase frase />
+      {/* frase = "Hello World" */}
+      <ImprimeFrase frase="Hello World" />
     </div>
   );
 }
