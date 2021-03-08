@@ -188,7 +188,7 @@ O diretório é dividido assim:
   - logo192.png _(Logo react)_
   - logo512.png _(Logo react)_
   - manifest.json _(Arquivo que descreve seu app e configura para aplicações mobile)_
-  - robots.txt _(Arquivo para robos CEO)_
+  - robots.txt _(Arquivo para robos SEO)_
 - src _(Pasta com conteúdo do seu site)_
   - App.css _(Estilo do App.js)_
   - App.js _(Onde fica o código de sua aplicação)_
